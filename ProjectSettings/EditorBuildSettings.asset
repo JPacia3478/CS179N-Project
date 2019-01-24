@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Maps/Main_Menu.unity
+    guid: 64f7120c897b71b4ca0da1417d741e5a
+  - enabled: 1
+    path: Assets/Maps/HUB_Menu.unity
+    guid: 6a2198171c64c884894d1ba3e5dac16d
+  - enabled: 1
+    path: Assets/Maps/village_forest_story1.unity
+    guid: 3658022edfdc2f04ba190bd4ca0103c1
+  - enabled: 1
+    path: Assets/Maps/village_forest_story2.unity
+    guid: a4c1e3052098f284888a23fde02827c6
+  - enabled: 1
+    path: Assets/Maps/Map1.unity
+    guid: 1ceaef47d0852bb4e9cf6afe251cc440
+  - enabled: 1
+    path: Assets/Maps/snow_castle_fight1.unity
+    guid: b39d8499bc285084690cf7113e5cd480
+  - enabled: 1
+    path: Assets/Maps/castlemap_finalboss.unity
+    guid: 6e89e036f478a2f4ebb937c3777979b4
+  - enabled: 1
+    path: Assets/Maps/village_forest_fight2.unity
+    guid: b97feb3fa9654664f9326afa868cb6c9
+  - enabled: 1
+    path: Assets/Maps/snow_castle_fight2.unity
+    guid: 5a8bf41adf4833440915c38889dc1ea6
+  - enabled: 1
+    path: Assets/Maps/Prologue.unity
+    guid: c1354fa878958ef44847d9b600903b76
+  - enabled: 1
+    path: Assets/Maps/AmbushCutscene.unity
+    guid: da68ce657d4f7be4799b2adf914571b1
+  - enabled: 1
+    path: Assets/Maps/Ending.unity
+    guid: 2e2557ef4a4533649a561cc4b4adf1f5
+  m_configObjects: {}

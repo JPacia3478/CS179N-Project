@@ -1,0 +1,184 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.AI;
+
+public class Enemy : MonoBehaviour
+{
+    //attributes
+    public int Level;
+    public int Exp;
+    public int HP;
+    public int SP;
+    public int Atk;
+    public int Def;
+    public int Spd;
+
+    //targeting the player
+    public Collider2D player;
+    public Transform target;
+    //hitbox
+    public Rigidbody2D enemy;
+    public Collider2D e_HitBox;
+
+    //battle variables
+    public bool defeat;
+    public bool hit;
+    public bool invuln;
+    public int invulCount;
+    public bool attacking;
+    private float attackTime = 0;
+    private float attackDelay = 0.5f;
+
+    public float speed;
+
+    //AI variables
+    public float range;
+    public bool chase = false;
+    private bool facingLeft = true;
+
+    public bool isFrozen;
+    public bool isBurned;
+    public bool isParalyzed;
+    public bool isSpedUp;
+
+    private string[] statuses = { "frozen", "burned", "paralyzed", "sped up" };
+
+    public void gotHit(int attacker)
+    {
+        if (!invuln)
+        {
+            HP -= attacker - Def;
+            invuln = true;
+            Debug.Log("Damage Taken");
+        }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        //agent = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        Level = 1;
+        Exp = 0;
+        HP = 100;
+        SP = 50;
+        Atk = 80;
+        Def = 30;
+        Spd = 23;
+
+        e_HitBox.enabled = false;
+        defeat = false;
+        hit = false;
+        invuln = false;
+        attacking = false;
+        invulCount = 0;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        //calculate distance of enemy -> player
+        float distance = Vector3.Distance(transform.position, target.position);
+        if(distance  < range)
+        {
+            chase = true;
+        }
+        //attacking the player
+        if(distance <= 2 && !attacking)
+        {
+            attacking = true;
+            attackTime = attackDelay;
+            e_HitBox.enabled = true;
+        }
+        if (attacking)
+        {
+            if (attackTime > 0)
+            {
+                attackTime = attackTime - Time.deltaTime;
+            }
+            else
+            {
+                attacking = false;
+                e_HitBox.enabled = false;
+            }
+        }
+        //chase function
+        if (chase)
+        {
+            /*transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            Vector3 targetDir = target.position - transform.position;
+            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 180);
+            transform.Translate(Vector3.up * Time.deltaTime * speed);*/
+            Vector3 targetDir = target.position - transform.position;
+            if (targetDir.y > 0 && distance > 1)
+                enemy.transform.Translate(0, speed * Time.deltaTime, 0);
+            if (targetDir.y < 0 && distance > 1)
+                enemy.transform.Translate(0, -speed * Time.deltaTime, 0);
+            if (targetDir.x < 0 && distance > 1)
+            {
+                enemy.transform.Translate(-speed * Time.deltaTime, 0, 0);
+                if (facingLeft == false)
+                    Flip();
+            }
+            if (targetDir.x > 0 && distance > 1)
+            {
+                enemy.transform.Translate(speed * Time.deltaTime, 0, 0);
+                if (facingLeft)
+                    Flip();
+            }
+        }
+        //behavior when taking damage
+        hit = false;
+        if (invulCount >= 60 && invuln)
+        {
+            invuln = false;
+            invulCount = 0;
+        }
+        if (invuln)
+        {
+            invulCount++;
+        }
+		if(HP <= 0)
+		{
+            HP = 0;
+			defeat = true;
+		}
+        //what happens when enemy is defeated
+		if(defeat)
+        {
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
+            player.SendMessageUpwards("enemyDefeated", 50);
+            player.SendMessageUpwards("addGold", 100);
+        }
+    }
+    //taking arrow damage
+    public void TakeArrowDamage(int arrowDamage)
+    {
+        HP -= arrowDamage - Def;
+    }
+
+    /*void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Hit");
+        hit = true;
+        if (!invuln)
+        {
+            gotHit(other.gameObject.GetComponent<MainCharacter>().Atk);
+        }
+    }*/
+    //flip the character and hitbox function
+    void Flip()
+    {
+        facingLeft = !facingLeft;
+
+        Vector2 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+    }
+}

@@ -1,0 +1,64 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class GameData {
+    public int storyProgression;
+    public int MapNo;
+    public int CharacterNo;
+    public int CurrentGold;
+    public int CurrentHPPotion;
+    public int CurrentSPPotion;
+    public int CurrentAtkBuff;
+    public int CurrentDefBuff;
+    public int CurrentEnchantB;
+    public int CurrentEnchantI;
+    public int isMystSold;
+    public int isTyrfSold;
+    public int isGrimSold;
+    public int isKamaiSold;
+    public int isGun1Sold;
+    public int isGun2Sold;
+    public int isShirtSold;
+    public int isCloakSold;
+    public int isCuirassSold;
+    public int isPlateSold;
+    public int isSandalsSold;
+    public int isBootsSold;
+    public int isGreavesSold;
+    public int weaponXylia;
+    public int armorXylia;
+    public int bootsXylia;
+    public int weaponStar;
+    public int armorStar;
+    public int bootsStar;
+    public int weaponRoc;
+    public int armorRoc;
+    public int bootsRoc;
+    public int level;
+    public int exp;
+    public int exp_cap;
+    public int maxHP_Xylia;
+    public int maxSP_Xylia;
+    public int atk_Xylia;
+    public int def_Xylia;
+    public int spd_Xylia;
+    public int maxHP_Star;
+    public int maxSP_Star;
+    public int atk_Star;
+    public int def_Star;
+    public int spd_Star;
+    public int maxHP_Roc;
+    public int maxSP_Roc;
+    public int atk_Roc;
+    public int def_Roc;
+    public int spd_Roc;
+    public int enemyArrow;
+
+    public int currHP;
+    public int currSP;
+    public int currAtk;
+    public int currDef;
+    public int currSpd;
+}

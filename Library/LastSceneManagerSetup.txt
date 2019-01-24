@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Maps/castlemap_finalboss.unity
+  isLoaded: 1
+  isActive: 1
